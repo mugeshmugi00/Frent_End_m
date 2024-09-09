@@ -71,33 +71,13 @@
       // Regex patterns
       const namePattern = /^[a-zA-Z\s]{3,30}$/;
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const numberPattern =  /^\d{10}$/;
       const passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+     
+      if(!namePattern .test(userNameData)){
+        document.getElementById("msgName").innerHTML =  'Name must be 3-30 characters, letters only.';
+      }
 
-       // Name validation
-       if (!namePattern.test(userNameData)) {
-        document.getElementById('msgName').innerText = 'Name must be 3-30 characters, letters only.';
-    }
-
-    
-      if (userEmileData == "") {
-        msgeml.textContent = "Enter valid Emile";
-      } 
-      else {
-        
-      }
-      if (mobileNumberData == "") {
-        msgnum.textContent = "Enter valid Number";
-      } 
-      else {
-        
-      }
-      if (passwordData == "") {
-        msgPass.textContent = "Enter valid Password";
-      } 
-      else {
-       
-      }
-      
     }
     </script>
     
