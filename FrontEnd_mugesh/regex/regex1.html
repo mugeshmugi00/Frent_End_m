@@ -3,83 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    .card{
-        padding: 20px;
-        margin: auto;
-        width: 300px;
-        border: 1px solid black;
-    }
-    .btn{
-        display: flex;
-        justify-content: center;
-    }
-    .error{
-        color: red;
-    }
-</style>
-<body>
-    <div class="card">
-        <div><label for="">Name:</label>
-            <input type="text" placeholder="Enter name" id="userName" >
-            <p class="error" id="name-error-message"></p>
-        </div>
-        <div><label for="">Email:</label>
-            <input type="email" placeholder="Enter Emile" id="userEmile" >
-            <p class="error" id="emile-error-message"></p>
-        </div>
-        <div><label for="">MobilNo:</label>
-            <input type="number" placeholder="Enter mobileNumber" id="mobileNumber" >
-            <p class="error" id="number-error-message"></p>
-        </div>
-        <div><label for="">Password:</label>
-            <input type="password" placeholder="Enter password" id="password" >
-            <p class="error" id="Password-error-message"></p>
-        </div>
-        <div><label for="">Gender:</label>
-            <input type="radio" name="oneclick">male
-            <input type="radio" name="oneclick">Female
+    <title>Sudent Form</title>
+    <style>
+        .main{
+            border: 1px solid;
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        }
+        .textBox{
+            width: 200px;
             
-        </div>
-        <br>
+        }
+        .submit_btn{
+            padding: 5px;
+            color: white;
+            background-color: green;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
         <div>
-            <input type="file">
+            <label for="" >Name:</label>
+        <input type="text" class="textBox" placeholder="Enter Your Name!" id="name">
+        <p id="Errername" style="color: red;"></p>
         </div>
-        <br>
-        <div class="btn">
-            <button type="button" onclick="submit()">Submit</button>
+        <div>
+            <button type="submit" class="submit_btn" onclick="submit()">Regester</button>
         </div>
-        
-        
     </div>
+    <script>
+        function submit(){
+            var nameData = document.getElementById("name").value;
+            //error
+            var Error_name = document.getElementById("Errername")
 
-  <script>
-    function submit() {
-      console.log("working");
-      let userNameData = document.getElementById("userName").value;
-      let userEmileData = document.getElementById("userEmile").value;
-      let mobileNumberData = document.getElementById("mobileNumber").value;
-      let passwordData = document.getElementById("password").value;
+            Error_name.innerHTML = "";
+            //
+            var namePattern = /^[a-zA-Z\s]+$/;
 
-      let msgName = document.getElementById("name-error-message");
-      let msgeml = document.getElementById("emile-error-message");
-      let msgnum = document.getElementById("number-error-message");
-      let msgPass = document.getElementById("Password-error-message");
+            if(!namePattern.test(nameData)){
+                Error_name.innerHTML = "Invalid name. Only letters and spaces are allowed.";
+            }
+            //return
+            alert("Valid Information Submited")
+        }
 
-      // Regex patterns
-      const namePattern = /^[a-zA-Z\s]{3,30}$/;
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const numberPattern =  /^\d{10}$/;
-      const passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-     
-      if(!namePattern .test(userNameData)){
-        document.getElementById("msgName").innerHTML =  'Name must be 3-30 characters, letters only.';
-      }
-
-    }
     </script>
-    
 </body>
 </html>
