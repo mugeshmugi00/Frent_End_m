@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        form { max-width: 500px; margin: 0 auto; padding: 20px; background-color: #f4f4f4; border-radius: 10px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-bottom: 10px; }
+        .error { color: red; font-size: 0.9em; }
+        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+
+    <h2>Registration Form</h2>
+    
+    <form id="registrationForm" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <span class="error" id="nameError"></span>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <span class="error" id="emailError"></span>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <span class="error" id="passwordError"></span>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <span class="error" id="genderError"></span>
+
+        <label for="file">Attach File (PDF only):</label>
+        <input type="file" id="file" name="file">
+        <span class="error" id="fileError"></span>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city">
+        <span class="error" id="cityError"></span>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state">
+        <span class="error" id="stateError"></span>
+
+        <label for="country">Country:</label>
+        <select id="country" name="country">
+            <option value="">Select Country</option>
+            <option value="USA">India</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="UK">UK</option>
+            <!-- Add more countries as needed -->
+        </select>
+        <span class="error" id="countryError"></span>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    try {
+        event.preventDefault(); // Prevent default form submission
+
+        // Clear previous error messages
+        document.getElementById('nameError').innerText = '';
+        document.getElementById('emailError').innerText = '';
+        document.getElementById('passwordError').innerText = '';
+        document.getElementById('genderError').innerText = '';
+        document.getElementById('fileError').innerText = '';
+        document.getElementById('cityError').innerText = '';
+        document.getElementById('stateError').innerText = '';
+        document.getElementById('countryError').innerText = '';
+
+        // Get form values
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const gender = document.getElementById('gender').value;
+        const file = document.getElementById('file').files[0];
+        const city = document.getElementById('city').value.trim();
+        const state = document.getElementById('state').value.trim();
+        const country = document.getElementById('country').value;
+
+        let isValid = true;
+
+        // Regex patterns
+        const namePattern = /^[a-zA-Z\s]{3,30}$/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        const filePattern = /\.pdf$/i;
+        const cityStatePattern = /^[a-zA-Z\s]{2,30}$/;
+
+        // Name validation
+        if (!namePattern.test(name)) {
+            document.getElementById('nameError').innerText = 'Name must be 3-30 characters, letters only.';
+            isValid = false;
+        }
+
+        // Email validation
+        if (!emailPattern.test(email)) {
+            document.getElementById('emailError').innerText = 'Invalid email format.';
+            isValid = false;
+        }
+
+        // Password validation
+        if (!passwordPattern.test(password)) {
+            document.getElementById('passwordError').innerText = 'Password must be at least 8 characters, include 1 uppercase letter and 1 number.';
+            isValid = false;
+        }
+
+        // Gender validation
+        if (!gender) {
+            document.getElementById('genderError').innerText = 'Please select your gender.';
+            isValid = false;
+        }
+
+        // File validation
+        if (!file) {
+            document.getElementById('fileError').innerText = 'Please attach a file.';
+            isValid = false;
+        } else if (!filePattern.test(file.name)) {
+            document.getElementById('fileError').innerText = 'Only PDF files are allowed.';
+            isValid = false;
+        }
+
+        // City validation
+        if (!cityStatePattern.test(city)) {
+            document.getElementById('cityError').innerText = 'City must be 2-30 characters, letters only.';
+            isValid = false;
+        }
+
+        // State validation
+        if (!cityStatePattern.test(state)) {
+            document.getElementById('stateError').innerText = 'State must be 2-30 characters, letters only.';
+            isValid = false;
+        }
+
+        // Country validation
+        if (!country) {
+            document.getElementById('countryError').innerText = 'Please select your country.';
+            isValid = false;
+        }
+
+        // If valid, submit form
+        if (isValid) {
+            console.log("Form submitted successfully!");
+            document.getElementById('registrationForm').submit();
+        }
+    } catch (error) {
+        console.error("Error occurred during form submission:", error.message);
+    }
+});
+
+    </script>
+
+</body>
+</html>

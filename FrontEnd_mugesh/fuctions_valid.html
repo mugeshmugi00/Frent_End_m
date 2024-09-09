@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <script>
+            const myList = [
+                {
+                    "name": "mugesh",
+                    "age": 22
+                },
+                {
+                    "name": "arun",
+                    "age": 18
+                },
+                {
+                    "name": "kamal",
+                    "age": 20
+                },
+                {
+                    "name": "john",
+                    "age": 32
+                },
+            ]
+            var name = prompt("Enter Your Name:")
+            var age = prompt("Enter Your Age:")
+            function validate(name, age) {
+                for (let i = 0; i <= myList.length; i++) {
+                    let student = myList[i]
+                    if (student["name"] == name && student["age"] == age) {
+                        return (true)
+                    }
+                    else {
+                        return (false)
+                    }
+                }
+            }
+            if (validate(name, age)) {
+                console.log("valid");
+            }
+            else {
+                console.log("un-valid");
+            }
+        </script>
+    </body>
+
+</html>

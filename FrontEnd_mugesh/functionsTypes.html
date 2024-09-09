@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>fuction types</title>
+    </head>
+
+    <body>
+        <script>
+            // function types
+            // name Function
+            function myFun(a) {
+                console.log(a);
+            } myFun(10)
+            // arrow Functions
+
+            var add = (x, y) => {
+                return x + y;
+            }
+            console.log(add(10, 10));
+            // anonymous function.
+            var greet = function (c, d) {
+                return c + d;
+            }
+            console.log(greet(20, 20));
+            // Immediately Invoked Function
+            (function () {
+                console.log(" Immediately Invoked Function");
+            })();
+
+            // next
+            // JavaScript Callbacks
+            function first() {
+                console.log("hi");
+            }
+            function secand() {
+                console.log("hello");
+
+            }
+            first(secand())
+            // JavaScript Array filter()
+            const ages = [32, 33, 16, 40];
+            const result = ages.filter(checkAdult);
+            console.log(result);
+
+            function checkAdult(age, index, Array) {
+                return age >= 18;
+            }
+            // JavaScript Array map()
+            const numbers = [65, 44, 12, 4];
+            const newArr = numbers.map(myFunction)
+            console.log(newArr);
+
+            function myFunction(num) {
+                return num * 10;
+            }
+
+        </script>
+    </body>
+
+</html>

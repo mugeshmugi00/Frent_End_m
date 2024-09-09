@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .card{
+        padding: 20px;
+        margin: auto;
+        width: 300px;
+        border: 1px solid black;
+    }
+    .btn{
+        display: flex;
+        justify-content: center;
+    }
+    .error{
+        color: red;
+    }
+</style>
+<body>
+    <div class="card">
+        <div><label for="">Name:</label>
+            <input type="text" placeholder="Enter name" id="userName" >
+            <p class="error" id="name-error-message"></p>
+        </div>
+        <div><label for="">Email:</label>
+            <input type="email" placeholder="Enter Emile" id="userEmile" >
+            <p class="error" id="emile-error-message"></p>
+        </div>
+        <div><label for="">MobilNo:</label>
+            <input type="number" placeholder="Enter mobileNumber" id="mobileNumber" >
+            <p class="error" id="number-error-message"></p>
+        </div>
+        <div><label for="">Password:</label>
+            <input type="password" placeholder="Enter password" id="password" >
+            <p class="error" id="Password-error-message"></p>
+        </div>
+        <div><label for="">Gender:</label>
+            <input type="radio" name="oneclick">male
+            <input type="radio" name="oneclick">Female
+            
+        </div>
+        <br>
+        <div>
+            <input type="file">
+        </div>
+        <br>
+        <div class="btn">
+            <button type="button" onclick="submit()">Submit</button>
+        </div>
+        
+        
+    </div>
+
+  <script>
+    function submit() {
+      console.log("working");
+      let userNameData = document.getElementById("userName").value;
+      let userEmileData = document.getElementById("userEmile").value;
+      let mobileNumberData = document.getElementById("mobileNumber").value;
+      let passwordData = document.getElementById("password").value;
+
+      let msgName = document.getElementById("name-error-message");
+      let msgeml = document.getElementById("emile-error-message");
+      let msgnum = document.getElementById("number-error-message");
+      let msgPass = document.getElementById("Password-error-message");
+
+      if (userNameData == "") {
+        msgName.textContent = "Enter valid Name";
+      } 
+      else {
+       
+      }
+      if (userNameData == "") {
+        msgeml.textContent = "Enter valid Emile";
+      } 
+      else {
+        
+      }
+      if (mobileNumberData == "") {
+        msgnum.textContent = "Enter valid Number";
+      } 
+      else {
+        
+      }
+      if (passwordData == "") {
+        msgPass.textContent = "Enter valid Password";
+      } 
+      else {
+       
+      }
+      
+    }
+    
+    </script>
+    
+</body>
+</html>

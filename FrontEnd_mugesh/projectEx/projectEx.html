@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mugesh Bakery</title>
+</head>
+<body>
+    <script>
+        function welcome(){
+            var owner = prompt("Hi Sir,Madom Welcome to Mugesh Bakery . What do you want ? cake , icecream and chocolate !")
+            var item1 = "cake";
+            var item2 = "icecream";
+            var item3 = "chocolate";
+            if (owner == item1 || owner == item2 || owner == item3){
+                //cake 
+                function cake(){
+                    if(item1 == owner){
+                        var customer = prompt("Yes.. wich size do you whant ?small, medium ,large and extralarge !")
+                        var cakeS = "small"
+                        var cakeM = "medium"
+                        var cakeL = "large"
+                        var cakeE = "extralarge"
+                        var cakeAmountSmall = 100; 
+                        var cakeAmountMedium = 200;
+                        var cakeAmountLarge = 300;
+                        var cakeAmountExtralarge = 400;
+                        //small cake
+                        function cakeSmall(){
+                            if(customer == cakeS){
+                                var customerCake_small = prompt("small size cake 100 RS.")
+                                if(customerCake_small == cakeAmountSmall){
+                                    prompt("thank you sir! come again")
+                                }
+                                else{
+                                    var monyS = prompt("invalid Amount the cake Rs is 100 !")
+                                    if(monyS == cakeAmountSmall){
+                                        prompt("thank you sir! come again")
+                                    }
+                                    prompt("invalid Amount the cake Rs is 100 !")
+                                }
+                            }
+                        }
+                        cakeSmall()
+                        //medium
+                        function cakeMedium(){
+                            if(customer == cakeM){
+                                var customerCake_Medium = prompt("medium size cake 200 RS.")
+                                if(customerCake_Medium == cakeAmountMedium){
+                                    prompt("thank you sir! come again")
+                                }
+                                else{
+                                    var monyM = prompt("invalid Amount the cake Rs is 200 !")
+                                    if(monyM == cakeAmountMedium){
+                                        prompt("thank you sir! come again")
+                                    }
+                                    prompt("invalid Amount the cake Rs is 200 !")
+                                }
+                            }
+                        }
+                        cakeMedium()
+
+                        //large
+                        function cakelarge(){
+                            if(customer == cakeL){
+                                var customerCake_Large = prompt("large size cake 300 RS.")
+                                if(customerCake_Large == cakeAmountLarge){
+                                    prompt("thank you sir! come again")
+                                }
+                                else{
+                                    var monyL = prompt("invalid Amount the cake Rs is 300 !")
+                                    if(monyL == cakeAmountLarge){
+                                        prompt("thank you sir! come again")
+                                    }
+                                    prompt("invalid Amount the cake Rs is 300 !")
+                                }
+                            }
+                        }
+                        cakelarge()
+
+                        //extralarg
+                        function cakeExtralarge(){
+                            if(customer == cakeE){
+                                var customerCake_ExtraLarge = prompt("Extralarge size cake 400 RS.")
+                                if(customerCake_ExtraLarge == cakeAmountExtralarge){
+                                    prompt("thank you sir! come again")
+                                }
+                                else{
+                                    var monyEL = prompt("invalid Amount the cake Rs is 400 !")
+                                    if(monyEL == cakeAmountExtralarge){
+                                        prompt("thank you sir! come again")
+                                    }
+                                    prompt("invalid Amount the cake Rs is 400 !")
+                                }
+                            }
+                        }
+                        cakeExtralarge()
+                    }
+
+                }
+                cake()
+                
+                // icecream 
+                function icecream(){
+                    if(item2 == owner){
+                        var customerIcecream = prompt("which flavour do you want ice cream ? Vanilla , Strawberry and cone")
+                        var ice1 = "vanilla";
+                        var ice2 = "strawberry";
+                        var ice3 = "cone";
+                        if(customerIcecream == ice1 || customerIcecream == ice2 || customerIcecream == ice3){
+                            //vanilla
+                            function vanilla(){
+                                if(customerIcecream == ice1){
+                                    var iceVannila = prompt("vannila ice 50 Rs")
+                                    if(iceVannila == 50){
+                                        prompt("thank you sir! come again")
+                                    }
+                                    else{
+                                        prompt("invalid Amount the cake Rs is 50 !")
+                                    }
+                                }
+                            }
+                            vanilla()
+                            
+                            //strawberry
+                            function strawberry(){
+                                if(customerIcecream == ice2){
+                                    var iceStrawberry = prompt("strawberry ice 80 Rs")
+                                    if(iceStrawberry == 80){
+                                        prompt("thank you sir! come again")
+                                    }
+                                    else{
+                                        prompt("invalid Amount the cake Rs is 80 !")
+                                    }
+                                }
+                            }
+                            strawberry()
+                            
+                            //cone
+                            function cone(){
+                                if(customerIcecream == ice3){
+                                    var iceCone = prompt("cone ice 40 Rs")
+                                    if(iceCone == 40){
+                                        prompt("thank you sir! come again")
+                                    }
+                                    else{
+                                        prompt("invalid Amount the cake Rs is 40 !")
+                                    }
+                                }
+                            }
+                            cone()
+
+                        }
+                        else{
+                            prompt("Sorry sir/madom we dont have That!. Please Enter Valid Detiels!2") 
+                        }
+                    }
+                }
+                icecream()
+                //chocolate
+                function chocolate(){
+                        if(owner == item3){
+                            var ch50 = "small";
+                            var ch100 = "large";
+                            var chocolatePromt = prompt("dairymilk only small and large")
+                            
+                            if(chocolatePromt == ch50 || chocolatePromt == ch100 ){
+                                //
+                                function dairymilk50(){
+                                    if(chocolatePromt == ch50){
+                                        var chS = prompt("Small chocolate is 50")
+                                        if(chS == 50){
+                                            prompt("thank you sir! come again")
+                                        }
+                                        else{
+                                            prompt("invalid Amount the chocolate Rs is 50 !")
+                                        }
+                                    }
+                                    
+                                }
+                                dairymilk50()
+                               
+                                //
+                                function dairymilk100(){
+                                    if(chocolatePromt == ch100){
+                                        var chL =prompt("Large chocolate is 100")
+                                        if(chL == 100){
+                                            prompt("thank you sir! come again")
+                                        }
+                                        else{
+                                            prompt("invalid Amount the chocolate Rs is 100 !")
+                                        }
+                                    }
+                                    
+                                }
+                                dairymilk100()
+                            }
+                            
+                        }
+                }    
+                chocolate()
+            }
+            else{
+                prompt("Sorry sir/madom we dont have That!. Please Enter Valid Detiels!1")
+            }
+        }
+        welcome()
+    </script>
+</body>
+</html>

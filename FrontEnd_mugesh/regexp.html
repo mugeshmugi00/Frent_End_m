@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form</title>
+        <style>
+            .fomr_outer {
+                width: 350px;
+                margin: auto;
+                border: 1px solid;
+                padding: 50px;
+            }
+
+            .span {
+                color: red;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="fomr_outer">
+            <label for="">Enter Name:</label>
+            <input type="text" id="name_data"><br>
+            <span class="span" id="ErrorName_data"></span>
+            <br><br>
+
+            <label for="">Enter Email:</label>
+            <input type="email" id="email_data"><br>
+            <span class="span" id="ErrorEmail_data">Enter valid Email!</span>
+            <br><br>
+
+            <label for="">Enter password:</label>
+            <input type="password" id="password_data"><br>
+            <span class="span" id="ErrorPassword_data">Enter valid password!</span>
+            <br><br>
+
+            <label for="">Enter mobileNo:</label>
+            <input type="number" id="mobileNo_data"><br>
+            <span class="span" id="ErrorMobileNo_data">Must be 10 Degits!</span>
+            <br><br>
+
+            <label for="">Gender:</label>
+            <input type="radio" id="male" name="gender">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender">
+            <label for="female">Female</label>
+            <br><br>
+            <button type="submit" onclick="form()">submit</button>
+        </div>
+        <!-- script -->
+        <script>
+            function form() {
+                let userName_data = document.getElementById("name_data").value;
+                let userEmail_data = document.getElementById("email_data").value;
+                let userpassword_data = document.getElementById("password_data").value;
+                let userMobile_data = document.getElementById("mobileNo_data").value;
+
+                let error_name = document.getElementById("ErrorName_data")
+                let error_email = document.getElementById("ErrorEmail_data")
+                let error_password = document.getElementById("ErrorPassword_data")
+                let error_mobile = document.getElementById("ErrorMobileNo_data")
+
+                if (userName_data == "") {
+                    error_name.textcontent = "Enter valid Name!";
+                }
+            }
+        </script>
+
+    </body>
+
+</html>
