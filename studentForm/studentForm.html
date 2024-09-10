@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudent Form</title>
+    <style>
+        *{margin: 0;padding: 0;}
+            body { font-family: Arial, sans-serif; }
+            form { max-width: 500px; margin: 0 auto; padding: 20px; background-color: #f4f4f4; border-radius: 10px; }
+            label { display: block; margin-bottom: 5px; font-weight: bold; }
+            input, select { width: 350px; padding: 8px; margin-bottom: 10px; }
+            .error { color: red; font-size: 0.9em; }
+            button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; }
+            button:hover { background-color: #218838; }
+            .main{width: 380px;border: 1px solid;padding: 20px;background-color: white;
+            border-radius: 20px;border: none;padding: 50px 85px;}
+            .bg{background-image: url(https://colorlib.com/etc/regform/colorlib-regform-8/images/signup-bg.jpg);width: 100%;height: 900px;display: flex;justify-content: center;align-items: center;background-repeat: no-repeat;background-position: center;background-size: cover;}
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class="main">
+            <h2>Registration Form</h2>
+        
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <span class="error" id="nameError"></span>
+    
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <span class="error" id="emailError"></span>
+    
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <span class="error" id="passwordError"></span>
+    
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <span class="error" id="genderError"></span>
+    
+            <label for="file">Attach File (PDF only):</label>
+            <input type="file" id="file" name="file">
+            <span class="error" id="fileError"></span>
+    
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city">
+            <span class="error" id="cityError"></span>
+    
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state">
+            <span class="error" id="stateError"></span>
+    
+            <label for="country">Country:</label>
+            <select id="country" name="country">
+                <option value="">Select Country</option>
+                <option value="USA">India</option>
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <option value="UK">UK</option>
+                <!-- Add more countries as needed -->
+            </select>
+            <span class="error" id="countryError"></span>
+            <br><br>
+            <button type="submit" onclick="submit()">Register</button>
+    </div>
+    </div>
+    <script>
+        function submit(){
+             // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const gender = document.getElementById('gender').value;
+            const file = document.getElementById('file').files[0];
+            const city = document.getElementById('city').value.trim();
+            const state = document.getElementById('state').value.trim();
+            const country = document.getElementById('country').value;
+            
+              // Clear previous error messages
+            var nameER = document.getElementById('nameError');
+            var emailER = document.getElementById('emailError');
+            var passER = document.getElementById('passwordError');
+            var genderER = document.getElementById('genderError');
+            var fileER = document.getElementById('fileError');
+            var cityER = document.getElementById('cityError');
+            var stateER = document.getElementById('stateError');
+            var contryER = document.getElementById('countryError');
+
+             // Regex patterns
+            const namePattern = /^[a-zA-Z\s]{3,30}$/;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const passwordPattern = /^(?=.[A-Z])(?=.\d)[A-Za-z\d]{8,}$/;
+            const filePattern = /\.pdf$/i;
+            const StatePattern = /^[a-zA-Z\s]{2,30}$/;
+            const cityStatePattern = /^[a-zA-Z\s]{2,30}$/;
+
+            //name
+           if(name == ""){
+            nameER.textContent = "Enter Your Name!";
+           }
+           else{
+            if(!namePattern.test(name)){
+                nameER.innerHTML = "Invalid name.3 to 30 letter letters and spaces are allowed.";
+            }
+           }
+           //email
+           if(email == ""){
+            emailER.textContent = "Enter Your Email!";
+            console.log("email")
+           }
+           else{
+            if(!emailPattern.test(email)){
+                emailER.innerHTML = "Enter Proper Email!";
+            }
+           }
+            //password
+            if(password == ""){
+                passER.textContent = "Enter Your password!";
+               }
+               else{
+                if(!emailPattern.test(password)){
+                    passER.innerHTML = "Has a minimum length of 8 characters.Contains at least one uppercase letter Contains at least one digitOnly consists of uppercase letters, lowercase letters, and digits.";
+                }
+               }
+               
+            //  gender
+            if(gender == ""){
+                genderER.textContent = "Choose a Gender!";
+            } 
+            //file
+            if(file == ""){
+                fileER.textContent = "choose a File";
+            }
+            else{
+                if(!filePattern.test(file)){
+                    fileER.innerHTML = "Select only pdf. File format!";
+                }
+            }
+           
+            //city
+            if(city == ""){
+                cityER.textContent = "Enter Your City!";
+            }
+            else{
+                if(!cityStatePattern.test(city)){
+                    cityER.innerHTML = "Letters only!";
+                }
+            }
+            //state
+            if(state == ""){
+                stateER.textContent = "Enter Your state!";
+            }
+            else{
+                if(!StatePattern.test(state)){
+                    stateER.innerHTML = "Letters only!";
+                }
+            }
+            //country
+            if(country == ""){
+                countryER.textContent = "select!";
+            }
+            alert("Submited Successfully!")
+
+        }
+
+    </script>
+</body>
+</html>
