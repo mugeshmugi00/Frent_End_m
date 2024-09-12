@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        .dashboard {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+        
+        h2, h3 {
+            text-align: center;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        input {
+            padding: 8px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #218838;
+        }
+        
+        #personTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        #personTable th, #personTable td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        #personTable button {
+            padding: 5px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        
+        #logoutBtn {
+            float: right;
+            padding: 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        #logoutBtn:hover {
+            background-color: #c82333;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <button id="logoutBtn">Logout</button>
+        <h2>Person Data Entry</h2>
+        <form id="personForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" >
+            <label for="email">Email:</label>
+            <input type="email" id="email" >
+            <label for="mobile">Mobile No:</label>
+            <input type="text" id="mobile" >
+            <button type="submit">Add Person</button>
+        </form>
+
+        <h3>Persons List</h3>
+        <table id="personTable">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile No</th>
+                    <th>Actions</th>
+                </tr>
+           
+            <tbody>
+                <!-- Entries will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script >
+        // Select the necessary DOM elements
+const logoutBtn = document.getElementById('logoutBtn');
+const personForm = document.getElementById('personForm');
+const personTableBody = document.querySelector('#personTable tbody');
+
+// Function to load persons from localStorage on page load
+function loadPersons() {
+    const persons = JSON.parse(localStorage.getItem('persons')) || [];
+    persons.forEach(person => addPersonToTable(person));
+}
+
+// Function to save persons to localStorage
+function savePersons(persons) {
+    localStorage.setItem('persons', JSON.stringify(persons));
+}
+
+// Function to add a person to the table
+function addPersonToTable(person) {
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+        <td>${person.name}</td>
+        <td>${person.email}</td>
+        <td>${person.mobile}</td>
+        <td>
+            <button onclick="editPerson('${person.email}')">Edit</button>
+            <button onclick="deletePerson('${person.email}')">Delete</button>
+        </td>
+    `;
+
+    personTableBody.appendChild(row);
+}
+
+// Event listener for form submission (Add person)
+personForm.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevents the form from reloading the page
+
+    // Get the input values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const mobile = document.getElementById('mobile').value;
+
+    const newPerson = { name, email, mobile };
+    
+    // Get existing persons from localStorage, or start with an empty array
+    let persons = JSON.parse(localStorage.getItem('persons')) || [];
+    
+    // Add the new person to the list
+    persons.push(newPerson);
+
+    // Save the updated list back to localStorage
+    savePersons(persons);
+
+    // Add the person to the table
+    addPersonToTable(newPerson);
+
+    // Clear the form
+    personForm.reset();
+});
+
+// Edit person function
+function editPerson(email) {
+    let persons = JSON.parse(localStorage.getItem('persons')) || [];
+    const person = persons.find(p => p.email === email);
+
+    if (person) {
+        document.getElementById('name').value = person.name;
+        document.getElementById('email').value = person.email;
+        document.getElementById('mobile').value = person.mobile;
+        deletePerson(email); // Remove the old entry so it can be updated
+    }
+}
+
+// Delete person function
+function deletePerson(email) {
+    let persons = JSON.parse(localStorage.getItem('persons')) || [];
+    
+    // Filter out the person by their email
+    persons = persons.filter(p => p.email !== email);
+
+    // Save the updated list back to localStorage
+    savePersons(persons);
+
+    // Clear and re-render the table
+    personTableBody.innerHTML = '';
+    loadPersons();
+}
+
+// Logout button functionality
+logoutBtn.addEventListener('click', () => {
+    // Clears session storage and redirects to login (for demonstration purposes)
+    sessionStorage.clear();
+    alert('Logged out');
+    window.location.reload();
+});
+
+// Load persons on page load
+window.onload = loadPersons;
+
+    </script>
+</body>
+</html>
