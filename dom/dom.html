@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Dom</h1>
+
+    <p id="p1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati itaque doloremque expedita, ex ea aut cum dolores reiciendis amet rem.</p>
+
+    <p class="para">getElementsByClassName</p>
+
+    <h4 class="head4">querySelectorAll</h4>
+
+    <h2>getElementsByTagName</h2>
+
+    <button type="button" onclick="change()">submit!!</button>
+
+    <script>
+        function change(){
+            document.getElementById("p1").innerHTML = "mugesh";
+
+            var tag = document.getElementsByTagName("h2")
+            tag[0] .innerHTML = "mugesh";
+
+           var className = document.getElementsByClassName("para")
+           className[0].innerHTML = "mugesh";
+
+           var query = document.querySelectorAll("h4.head4")
+           query[0].innerHTML = "mugesh";
+        }
+    </script>
+</body>
+</html>
