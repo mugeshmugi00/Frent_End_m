@@ -28,17 +28,17 @@
                 <!-- Email input -->
                  
                 <div data-mdb-input-init class="form-outline mb-4">
+                  <label class="form-label" for="form3Example3">Email address</label>
                   <input type="email" id="form3Example3" class="form-control form-control-lg"
                     placeholder="Enter a valid email address" />
-                  <label class="form-label" for="form3Example3">Email address</label>
                   <span class="error" id="emailError"></span>
                 </div>
       
                 <!-- Password input -->
                 <div data-mdb-input-init class="form-outline mb-3">
+                  <label class="form-label" for="form3Example4">Password</label>
                   <input type="password" id="form3Example4" class="form-control form-control-lg"
                     placeholder="Enter password" />
-                  <label class="form-label" for="form3Example4">Password</label>
                   <span class="error" id="passError"></span>
                 </div>
       
@@ -56,6 +56,7 @@
         </div>
       <!-- script -->
        <script>
+        //localStorage.removeItem("persons")
             const Email = "mugi84219@gmail.com";
             const Password = "Mugesh12";
             //error
@@ -87,8 +88,10 @@
                     }
                 }
                 //dashbord -> page
+                
                 if(Email == userEmail && Password == userPassword){
                     window.location.href = "http://127.0.0.1:5500/loginAnd_Dashbord/dashbord.html?";
+                    localStorage.setItem("islogIn",Email)
                 }
                 else{
                   emailER.textContent = "Email or Password is Incorrect"
