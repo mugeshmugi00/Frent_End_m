@@ -13,6 +13,22 @@
         .h-custom {
         height: calc(100% - 73px);
         }
+        /* Styles for the password container */
+        .password-container {
+            position: relative;
+        }
+        .password-container input {
+            width: 100%;
+            padding-right: 40px;
+        }
+        /* Eye icon position */
+        .password-container .eye-icon {
+            position: absolute;
+            right: 15px;
+            top: 70%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -26,78 +42,98 @@
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
               <form>
                 <!-- Email input -->
-                 
-                <div data-mdb-input-init class="form-outline mb-4">
+                <div class="form-outline mb-4">
                   <label class="form-label" for="form3Example3">Email address</label>
                   <input type="email" id="form3Example3" class="form-control form-control-lg"
                     placeholder="Enter a valid email address" />
                   <span class="error" id="emailError"></span>
                 </div>
-      
-                <!-- Password input -->
-                <div data-mdb-input-init class="form-outline mb-3">
+                <span class="error" id="senterERROR"></span>
+                
+                <!-- Password input with eye icon -->
+                <div class="form-outline mb-3 password-container">
                   <label class="form-label" for="form3Example4">Password</label>
-                  <input type="password" id="form3Example4" class="form-control form-control-lg"
-                    placeholder="Enter password" />
+                  <input type="password" id="form3Example4" class="form-control form-control-lg pass"
+                    placeholder="Enter password">
+                  <i class="fa fa-eye eye-icon" id="togglePassword" onclick="togglePasswordVisibility()"></i>
                   <span class="error" id="passError"></span>
                 </div>
       
                 <div class="d-flex justify-content-between align-items-center">
-      
-                <div class="text-center text-lg-start mt-4 pt-2">
-                  <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
-                    style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="login()"> 
-                    Login</button>
+                  <div class="text-center text-lg-start mt-4 pt-2">
+                    <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+                      style="padding-left: 2.5rem; padding-right: 2.5rem;" onclick="login()"> 
+                      Login
+                    </button>
+                  </div>
                 </div>
-      
               </form>
             </div>
           </div>
         </div>
-      <!-- script -->
-       <script>
-        //localStorage.removeItem("persons")
-            const Email = "mugi84219@gmail.com";
-            const Password = "Mugesh12";
-            //error
-            var emailER = document.getElementById("emailError");
-            var passER = document.getElementById("passError");
+    </section>
 
-            function login(){
-                var userEmail = document.getElementById("form3Example3").value;
-                var userPassword = document.getElementById("form3Example4").value;
+    <!-- Script for form validation and password visibility toggle -->
+    <script>
+        // Constants for valid email and password
+        const Email = "mugi84219@gmail.com";
+        const Password = "Mugesh12";
 
-                
-                const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        // Get error display elements
+        var emailER = document.getElementById("emailError");
+        var passER = document.getElementById("passError");
+        var centerEr = document.getElementById("senterERROR");
 
-                if(userEmail == ""){
-                    emailER.textContent = "Enter Your Name!";
-                   }
-                   else{
-                    if(!emailPattern.test(userEmail)){
-                        emailER.innerHTML = "must be at least two letters,uppercase or lowercase letter and ended with .com or .org";
-                    }
-                   }
-                if(userPassword == ""){
-                    passER.textContent = "Enter Your Password!"
-                }
-                else{
-                    if(!passwordPattern.test(userPassword)){
-                        passER.innerHTML = "Has a minimum length of 8 characters.Contains at least one uppercase letter Contains at least one digitOnly consists of uppercase letters, lowercase letters, and digits.";
-                    }
-                }
-                //dashbord -> page
-                
-                if(Email == userEmail && Password == userPassword){
-                    window.location.href = "http://127.0.0.1:5500/loginAnd_Dashbord/dashbord.html?";
-                    localStorage.setItem("islogIn",Email)
-                }
-                else{
-                  emailER.textContent = "Email or Password is Incorrect"
-                  passER.textContent = "Email or Password is Incorrect"
-                }
+        // Password visibility toggle
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("form3Example4");
+            var toggleIcon = document.getElementById("togglePassword");
+            // Toggle password input type between 'password' and 'text'
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleIcon.classList.add("fa-eye-slash");
+                toggleIcon.classList.remove("fa-eye");
+            } else {
+                passwordInput.type = "password";
+                toggleIcon.classList.add("fa-eye");
+                toggleIcon.classList.remove("fa-eye-slash");
             }
-       </script>
+        }
+
+        // Form validation function
+        function login(){
+            var userEmail = document.getElementById("form3Example3").value;
+            var userPassword = document.getElementById("form3Example4").value;
+
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+
+            // Reset previous errors
+            emailER.innerHTML = "";
+            passER.innerHTML = "";
+            centerEr.innerHTML = "";
+
+            // Validate Email
+            if(userEmail == "") {
+                emailER.innerHTML = "Enter Email!";
+            } else if (!emailPattern.test(userEmail)) {
+                emailER.innerHTML = "Enter a valid email address.";
+            }
+
+            // Validate Password
+            if(userPassword == "") {
+                passER.innerHTML = "Enter Password!";
+            } else if (!passwordPattern.test(userPassword)) {
+                passER.innerHTML = "Password must be at least 8 characters long, contain an uppercase letter, lowercase letter, and a number.";
+            }
+
+            // Check if both email and password are valid
+            if(userEmail == Email && userPassword == Password) {
+                window.location.href = "http://127.0.0.1:5500/loginAnd_Dashbord/dashbord.html";
+            } else if (userEmail !== Email || userPassword !== Password) {
+                centerEr.innerHTML = "Email or Password is invalid!";
+            }
+        }
+    </script>
 </body>
 </html>
