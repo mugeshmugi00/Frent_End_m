@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //hosting
+        //console.log(name)
+        //var name = "mugesh";
+        //lexical
+            //->global
+                //function myfun(){
+                    //var myname = "mugesh";//global variable
+                    //console.log(myname)
+                //}
+                //myfun()
+                //console.log(myname)
+            //local
+                //function sayHello() {
+                   // let name = "John"; // Local variable
+                
+                   // console.log(name);
+                //}
+                //sayHello(); // Output: "John"
+                //console.log(name);     
+            //nested
+               // function outer() {
+                    //let name = "John"; // Outer function variable
+                
+                   // function inner() {
+                     //   console.log("Hello " + name);
+                    //}
+                
+                    //inner(); // Output: "Hello John"
+                //}
+                
+                //outer();
+            //block
+                //function sayHello() {
+                    //let name = "mugesh"; // Function variable
+                
+                    //if (true) {
+                     //   let message = "Hello"; // Block variable
+                    //    console.log(message + " " + name); 
+                        // Output: "Hello John"
+                    //}
+                
+                   // console.log(message); 
+                    
+               // }
+                
+                //sayHello();
+
+        //callback function
+            function greet(name, callback) {
+                console.log(name);
+                callback();
+            }
+            function callMe() {
+                console.log('I am callback function');
+            }
+            greet('Peter', callMe);      
+
+    </script>   
+</body>
+</html>
