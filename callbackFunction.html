@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>callBack Function</title>
+</head>
+<body>
+    <script>
+            // Add function
+            function add(a, callback) {
+                let result = a + 5;
+                console.log(result, 'add');  
+                callback(result);            
+            }
+            
+            // Subtract function
+            function subtract(a, callback) {
+                let result = a - 5;
+                console.log(result, 'subtract'); 
+                callback(result);                 
+            }
+        
+            // Multiply function
+            function multiply(a, callback) {
+                let result = a * 5;
+                console.log(result, 'multiply');  
+                callback(result);                 
+            }
+        
+            // Divide function
+            function divide(a, callback) {
+                let result = a / 5;
+                console.log(result, 'divide');    
+                callback(result);                 
+            }
+        
+            let num1 = parseInt(prompt("Enter the number:"));
+
+            add(num1,function(addResult){
+                subtract(addResult,function(subResult){
+                    multiply(subResult,function(multresult){
+                        divide(multresult,function(divresult){
+
+                        });
+                    });
+                });
+            });
+
+           
+        
+    </script>
+        
+</body>
+</html>

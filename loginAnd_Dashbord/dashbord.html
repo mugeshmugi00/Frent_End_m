@@ -10,35 +10,65 @@
     <div class="main">
         
         <div class="dashboard">
-                <button id="logoutBtn" onclick="log_out()">Logout</button>
-                <h2>Enter Person Data:</h2>
-                <form id="personForm">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email">
-                    <label for="mobile">Mobile No:</label>
-                    <input type="text" id="mobile">
-                    <button type="submit">Add Person</button>
-                </form>
-        
-                <h3>Persons List</h3>
-                <table id="personTable">
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Mobile No</th>
-                            <th>Actions</th>
-                        </tr>
-                </table>
+            <button id="logoutBtn" onclick="log_out()">Logout</button>
+            <h2>Enter Person Data:</h2>
+            <form id="personForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <label for="mobile">Mobile No:</label>
+                <input type="text" id="mobile" required>
+                <button type="submit"  onclick="addperson()">Add Person</button>
+            </form>
+    
+            <h3>Persons List</h3>
+            <table id="personTable">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile No</th>
+                    <th>Actions</th>
+                </tr>
+            </table>
         </div>
         <div class="bg"></div>
     </div>    
 
     <script>
-        function log_out(){
-            window.location.href = "http://127.0.0.1:5500/loginAnd_Dashbord/login_Page.html" 
+        // Log out function
+        function log_out() {
+            window.location.href = "http://127.0.0.1:5500/loginAnd_Dashbord/login_Page.html";
         }
+         //get
+        function addperson() {
+            localStorage.clear()
+            let persons = JSON.parse(localStorage.getItem('persons')) || [];
+            const personTable = document.getElementById('personTable');
+        
+            personTable.innerHTML = `
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile No</th>
+                    <th>Actions</th>
+                </tr>
+            `;
+
+            persons.forEach((person, index) => {
+                let row = personTable.insertRow();
+                row.innerHTML = `
+                    <td>${person.name}</td>
+                    <td>${person.email}</td>
+                    <td>${person.mobile}</td>
+                    <td>
+                        <button onclick="editPerson(${index})">Edit</button>
+                        <button onclick="deletePerson(${index})">Delete</button>
+                    </td>
+                `;
+            });
+        }  
+        
     </script>
 </body>
 </html>

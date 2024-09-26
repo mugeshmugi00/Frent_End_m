@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        
+        .dashboard {
+            width: 700px;
+            margin: 0 auto;
+            /* border: 1px solid #ccc; */
+            padding: 20px;
+        }
+        
+        h2, h3 {
+            text-align: center;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        input {
+            padding: 8px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        button {
+            padding: 10px;
+            background-color: #0D6EFD;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color:  #075ddc;
+        }
+        
+        #table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        #table th, #table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        #logoutBtn {
+            float: right;
+            padding: 10px;
+            background-color: rgb(217, 7, 7);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        
+        #logoutBtn:hover {
+            background-color: rgb(159, 7, 7);
+        }
+        .bg{
+            background-image: url(https://preview.colorlib.com/theme/imagine/images/undraw_investing_7u74.svg);
+            background-repeat: no-repeat;
+            height: 419px;
+            width: 518px;
+            background-size: cover;
+            background-position: center;
+        }
+        .main{
+            display: flex;
+        }
+        .error{color: red;}
+        
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="dashboard">
+            <button id="logoutBtn" onclick="log_out()">Logout</button>
+    
+            <h2>Enter Person Data:</h2>
+            <form id="form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                <span id="ErrorName" class="error"></span>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <span id="ErrorEmail" class="error"></span>
+
+                <label for="mobile">Mobile No:</label>
+                <input type="text" id="mobile" required>
+                <span id="ErrorMobile" class="error"></span>
+
+                <button type="submit">Add Person</button>
+            </form>
+            <h3>Person List</h3>
+            <table id="table">
+                <tr>
+                    <td class="col">Name</td>
+                    <td class="col">Email</td>
+                    <td class="col">MobileNo</td>
+                    <td class="col">Action</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+        <script>
+            // Log out function
+            function log_out() {
+                window.location.href = "http://127.0.0.1:5500/loginAnd_Dashbord/login_Page.html";
+            }
+            //localStorage.clear()
+            //submit
+            function submit(){
+        
+                document.getElementById('form').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                });
+                
+                var dataEnterd = retriveData();
+                var readData = readDataFormLocalStorage(dataEnterd);
+                insert(readData);
+                
+            }
+    
+            // Retrieving data from form
+            function retriveData(){
+                var userName = document.getElementById("name").value;
+                var userEmail = document.getElementById("email").value;
+                var userMobile = document.getElementById("mobile").value;
+    
+                var arr = [userName, userEmail, userMobile];
+                return arr;
+            }
+    
+           // Store data in local storage
+            function readDataFormLocalStorage(dataEnterd) {
+                let persons = JSON.parse(localStorage.getItem('persons')) || [];
+                persons.push({ name: dataEnterd[0], email: dataEnterd[1], mobile: dataEnterd[2] });
+                localStorage.setItem('persons', JSON.stringify(persons));
+                loadPersons();
+            }
+
+            // Insert data into the table
+            function loadPersons() {
+                const persons = JSON.parse(localStorage.getItem('persons')) || [];
+                let table = document.getElementById('table');
+                table.innerHTML = `
+                    <tr>
+                        <td class="col">Name</td>
+                        <td class="col">Email</td>
+                        <td class="col">MobileNo</td>
+                        <td class="col">Action</td>
+                    </tr>
+                `;  // Reset table
+                persons.forEach((person, index) => {
+                    let row = table.insertRow();
+                    row.insertCell(0).innerHTML = person.name;
+                    row.insertCell(1).innerHTML = person.email;
+                    row.insertCell(2).innerHTML = person.mobile;
+                    row.insertCell(3).innerHTML = `<button onclick="editPerson(${index})">Edit</button> <button onclick="deletePerson(${index})">Delete</button>`;
+                });
+            }
+
+            // Edit person
+            window.editPerson = (index) => {
+                const persons = JSON.parse(localStorage.getItem('persons')) || [];
+                const person = persons[index];
+
+                document.getElementById('name').value = person.name;
+                document.getElementById('email').value = person.email;
+                document.getElementById('mobile').value = person.mobile;
+
+                persons.splice(index, 1);
+                localStorage.setItem('persons', JSON.stringify(persons));
+                loadPersons();
+            };
+
+            // Delete person
+            window.deletePerson = (index) => {
+                const persons = JSON.parse(localStorage.getItem('persons')) || [];
+                persons.splice(index, 1);
+                localStorage.setItem('persons', JSON.stringify(persons));
+                loadPersons();
+            };
+
+            // Add new person
+            document.getElementById('form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                var dataEnterd = retriveData();
+                readDataFormLocalStorage(dataEnterd);
+            });
+
+            // Retrieve data from form
+            function retriveData() {
+                var userName = document.getElementById("name").value;
+                var userEmail = document.getElementById("email").value;
+                var userMobile = document.getElementById("mobile").value;
+
+                var arr = [userName, userEmail, userMobile];
+                return arr;
+            }
+
+            loadPersons(); // Load persons on page load
+
+           
+        </script>
+    
+    
+</body>
+</html>
