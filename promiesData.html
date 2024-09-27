@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var x = 0;
+        const promisee = new Promise(function(resolve,reject){
+           
+            if(x == 0){
+                resolve("resolve block");
+            }
+            else{
+                reject("reject block")
+            }
+        });
+        console.log(promisee);
+
+        // async function
+        // Simulating a function that returns a promise after 2 seconds
+        function fetchData() {
+            return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve("Data fetched!");
+            }, 2000);
+            });
+        }
+        
+        // Async function using await
+        async function getData() {
+            console.log("Fetching data...");
+            const result = await fetchData(); // wait for the promise to resolve
+            console.log(result); 
+        }
+        
+        getData();
+        
+    </script>
+    
+</body>
+</html>
